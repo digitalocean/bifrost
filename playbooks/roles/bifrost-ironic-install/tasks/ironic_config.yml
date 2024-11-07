@@ -35,13 +35,14 @@
   ansible.builtin.assert:
     that: isolinux_bin_path is defined
 
-- name: "Locate ISOLINUX binary"
-  when: isolinux_bin_path is not defined  # NOTE: This is a workaround with_first_found acting locally
-  set_fact:
-    isolinux_bin_path: "{{ item }}"
-  with_first_found:
-    - /usr/lib/ISOLINUX/isolinux.bin
-    - /usr/share/syslinux/isolinux.bin
+# NOTE: This is running for some damn reason even when isolinux_bin_path is defined
+# - name: "Locate ISOLINUX binary"
+#   when: isolinux_bin_path is not defined  # NOTE: This is a workaround with_first_found acting locally
+#   set_fact:
+#     isolinux_bin_path: "{{ item }}"
+#   with_first_found:
+#     - /usr/lib/ISOLINUX/isolinux.bin
+#     - /usr/share/syslinux/isolinux.bin
 
 - name: "Create ironic config"
   template:

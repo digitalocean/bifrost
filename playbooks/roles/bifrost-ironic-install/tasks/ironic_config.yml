@@ -31,6 +31,7 @@
 - name: "Configure hardware interfaces"
   import_tasks: hw_types.yml
 - name: "Locate ISOLINUX binary"
+  when: isolinux_bin_path is not defined  # NOTE: This is a workaround with_first_found acting locally
   set_fact:
     isolinux_bin_path: "{{ item }}"
   with_first_found:
